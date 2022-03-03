@@ -2,12 +2,24 @@ pipeline {
     agent any 
     options {
     buildDiscarder(logRotator(numToKeepStr: '2')
-    
+    disableConcurrentBuilds()
+    }
+  triggers {
+        sh 'cron('1 * * * * *')'
     }
     stages {
         stage('Declaratice pipeline') {
             steps {
-                echo 'Hello world!' 
+                sh 'echo 'Hello world!' '
+            }
+            stages {
+        stage('stage 1') {
+            steps {
+                sh 'echo 'stage 1!' '
+            }
+            tage('stage 2') {
+            steps {
+                sh 'echo 'stage 2!' '
             }
         }
     }
